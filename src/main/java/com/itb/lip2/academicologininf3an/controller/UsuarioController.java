@@ -1,7 +1,6 @@
 package com.itb.lip2.academicologininf3an.controller;
 
 import java.net.URI;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
