@@ -1,6 +1,7 @@
 package com.itb.lip2.academicologininf3an.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +28,19 @@ public class UsuarioServiceImpl implements UsuarioService {
 		
 		return usuarioRepository.findAll();
 	}
+
+	@Override
+	public Optional<Usuario> findById(Long id) {
+		return usuarioRepository.findById(id);
+	}
+
+	/*@Override
+	public Usuario findUserById(Long id) {
+		System.out.println("Email " + usuarioRepository.getById(id).getEmail());
+		return usuarioRepository.getById(id);
+	}
+
+*/
 
 
 
