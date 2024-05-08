@@ -1,23 +1,19 @@
 package com.itb.lip2.academicologininf3an.model;
 
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+
 import java.time.LocalDate;
 import java.util.Collection;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 
 @Entity
 @Table(name = "usuarios")
-public class Usuario {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "tipoUsuario", discriminatorType = DiscriminatorType.STRING)
+@EnableJpaAuditing
+public abstract class Usuario {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-Incremento
@@ -28,6 +24,10 @@ public class Usuario {
 	private String senha;
 	private boolean codStatusUsuario;
 	private LocalDate dataNascimento;
+
+	@Column(insertable = false, updatable = false)
+	private String tipoUsuario;
+
 	
 	// FetchType.EAGER  -> Traz todos os registros relacionados
 	// FetchType.LAZY   -> Não traz os registros relacionados
@@ -39,8 +39,19 @@ public class Usuario {
 			    inverseJoinColumns = @JoinColumn(name="papel_id", referencedColumnName = "id")
 			)
 	private Collection<Papel> papeis;
-	
-	
+
+	public Usuario() {
+
+	}
+
+	public Usuario(Long id, String nome, String email, String senha, Collection<Papel> papeis) {
+		this.id = id;
+		this.nome = nome;
+		this.email = email;
+		this.senha = senha;
+		this.papeis = papeis;
+	}
+
 	public void setId(Long id) {
 		this.id = id;
 	}	
@@ -89,8 +100,12 @@ public class Usuario {
 	public void setPapeis(Collection<Papel> papeis) {
 		this.papeis = papeis;
 	}
-	
-	
-	
-	
+
+	public String getTipoUsuario() {
+		return tipoUsuario;
+	}
+
+	public void setTipoUsuario(String tipoUsuario) {
+		this.tipoUsuario = tipoUsuario;
+	}
 }

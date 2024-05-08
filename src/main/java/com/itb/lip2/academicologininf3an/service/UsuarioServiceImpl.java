@@ -34,13 +34,6 @@ public class UsuarioServiceImpl implements UsuarioService {
 		return usuarioRepository.findById(id);
 	}
 
-	/*@Override
-	public Usuario findUserById(Long id) {
-		System.out.println("Email " + usuarioRepository.getById(id).getEmail());
-		return usuarioRepository.getById(id);
-	}
-
-*/
 
 
 

@@ -1,5 +1,6 @@
 package com.itb.lip2.academicologininf3an;
 
+import com.itb.lip2.academicologininf3an.model.Usuario;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -8,6 +9,7 @@ public class AcademicoLoginInf3anApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(AcademicoLoginInf3anApplication.class, args);
+
 	}
 
 }
