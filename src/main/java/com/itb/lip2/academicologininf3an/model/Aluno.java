@@ -1,7 +1,5 @@
 package com.itb.lip2.academicologininf3an.model;
 
-
-
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import java.util.Collection;

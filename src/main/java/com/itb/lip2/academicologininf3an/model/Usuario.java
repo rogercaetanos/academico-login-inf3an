@@ -1,10 +1,12 @@
 package com.itb.lip2.academicologininf3an.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import java.time.LocalDate;
 import java.util.Collection;
-
 import javax.persistence.*;
 
 
@@ -13,6 +15,11 @@ import javax.persistence.*;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "tipoUsuario", discriminatorType = DiscriminatorType.STRING)
 @EnableJpaAuditing
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "tipoUsuario")
+@JsonSubTypes({
+	@JsonSubTypes.Type(value = Aluno.class, name = "Aluno"),
+	@JsonSubTypes.Type(value = Professor.class, name = "Professor")
+})
 public abstract class Usuario {
 	
 	@Id
@@ -24,7 +31,7 @@ public abstract class Usuario {
 	private String senha;
 	private boolean codStatusUsuario;
 	private LocalDate dataNascimento;
-
+	@JsonIgnore
 	@Column(insertable = false, updatable = false)
 	private String tipoUsuario;
 
