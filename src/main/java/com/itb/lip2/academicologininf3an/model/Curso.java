@@ -14,6 +14,10 @@ public class Curso {
     private String nomeCurso;
     private String descricaoCurso;
 
+    @ManyToOne
+    @JoinColumn(name="usuario_id")
+    private Professor professor;
+
     public Curso() {
 
     }
@@ -45,6 +49,14 @@ public class Curso {
 
     public void setDescricaoCurso(String descricaoCurso) {
         this.descricaoCurso = descricaoCurso;
+    }
+
+    public Professor getProfessor() {
+        return professor;
+    }
+
+    public void setProfessor(Professor professor) {
+        this.professor = professor;
     }
 
     @Override

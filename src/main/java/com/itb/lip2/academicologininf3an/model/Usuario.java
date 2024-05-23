@@ -24,16 +24,16 @@ public abstract class Usuario {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-Incremento
-	private Long id;
-	private String nome;
-	private String sobrenome;
-	private String email;
-	private String senha;
-	private boolean codStatusUsuario;
-	private LocalDate dataNascimento;
+	protected Long id;
+	protected String nome;
+	protected String sobrenome;
+	protected String email;
+	protected String senha;
+	protected boolean codStatusUsuario;
+	protected LocalDate dataNascimento;
 	@JsonIgnore
 	@Column(insertable = false, updatable = false)
-	private String tipoUsuario;
+	protected String tipoUsuario;
 
 	
 	// FetchType.EAGER  -> Traz todos os registros relacionados
