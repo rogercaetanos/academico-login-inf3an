@@ -12,7 +12,7 @@ import java.util.List;
 
 @Entity
 @DiscriminatorValue(value = "Professor")
-public class Professor extends Usuario{
+public class Professor extends Usuario {
 
     private int pontuacao;
 
