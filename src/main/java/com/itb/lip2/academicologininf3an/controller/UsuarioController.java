@@ -23,7 +23,6 @@ public class UsuarioController {
 	public ResponseEntity<List<Usuario>> getUsers() {
 
 		return ResponseEntity.ok().body(usuarioService.findAll());
-
 	}
 
 	@PostMapping("/users")
