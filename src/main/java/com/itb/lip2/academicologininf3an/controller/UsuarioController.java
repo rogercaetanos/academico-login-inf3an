@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -34,13 +35,17 @@ public class UsuarioController {
 	}
 
 	@GetMapping("/users/{id}")
-	public ResponseEntity<Usuario> findUsuarioById(@PathVariable(value = "id") Long id) {
+	public ResponseEntity<Usuario> findUserById(@PathVariable(value = "id") Long id) {
 
 		return ResponseEntity.ok().body(usuarioService.findById(id).get());
 
 	}
-
-
-
-
+	@PutMapping("/users/{id}")
+	public ResponseEntity<Object> updateUser(@PathVariable(value = "id") Long id, @RequestBody Usuario usuario) {
+		try{
+			return ResponseEntity.ok().body(usuarioService.update(id, usuario));
+		}catch (Exception e){
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+		}
+	}
 }

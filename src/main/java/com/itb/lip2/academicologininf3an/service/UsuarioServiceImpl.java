@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import com.itb.lip2.academicologininf3an.model.Usuario;
 import com.itb.lip2.academicologininf3an.repository.UsuarioRepository;
 
+import javax.transaction.Transactional;
+
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
 	
@@ -34,7 +36,14 @@ public class UsuarioServiceImpl implements UsuarioService {
 		return usuarioRepository.findById(id);
 	}
 
-
-
-
+	@Override
+	@Transactional
+	public Usuario update(Long id, Usuario usuario) throws Exception {
+		return usuarioRepository.findById(id).map(user ->{
+			user.setNome(usuario.getNome());
+			user.setSobrenome(usuario.getSobrenome());
+			user.setDataNascimento(usuario.getDataNascimento());
+			return usuarioRepository.save(user);
+        }).orElseThrow(()-> new Exception("Usuário não encontrado!"));
+	}
 }
