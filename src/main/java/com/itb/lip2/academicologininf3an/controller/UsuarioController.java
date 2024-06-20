@@ -35,10 +35,13 @@ public class UsuarioController {
 	}
 
 	@GetMapping("/users/{id}")
-	public ResponseEntity<Usuario> findUserById(@PathVariable(value = "id") Long id) {
-
-		return ResponseEntity.ok().body(usuarioService.findById(id).get());
-
+	public ResponseEntity<Object> findUserById(@PathVariable(value = "id") Long id) {
+		//return ResponseEntity.ok().body(usuarioService.findById(id).get());
+		try{
+			return ResponseEntity.ok().body(usuarioService.findById(id).get());
+		}catch (Exception e){
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Usuário não encontrado!");
+		}
 	}
 	@PutMapping("/users/{id}")
 	public ResponseEntity<Object> updateUser(@PathVariable(value = "id") Long id, @RequestBody Usuario usuario) {
