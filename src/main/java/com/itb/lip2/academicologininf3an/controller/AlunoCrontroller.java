@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/academico/api/v1/alunos")
 public class AlunoCrontroller {
 
-    @Autowired
-    private AlunoService alunoService;
+    private final AlunoService alunoService;
+
+    AlunoCrontroller (AlunoService alunoService) {
+        this.alunoService = alunoService;
+    }
 
     @PutMapping("/{id}")
     public ResponseEntity<Object>updateAluno(@RequestBody Aluno aluno, @PathVariable(value="id") Long id) {
